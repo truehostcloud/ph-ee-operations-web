@@ -184,7 +184,6 @@ export class ViewUserComponent implements OnInit {
 
   reloadCurrentUserData() {
     this.usersService.getUser(this.userData.id).subscribe((res) => {
-      console.log(res);
         this.userData = res;
       });
     
