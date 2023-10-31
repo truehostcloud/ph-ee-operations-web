@@ -43,6 +43,7 @@ export class IncomingRequestToPayComponent implements OnInit {
   maxDate = new Date();
   payeePartyId = new FormControl();
   payerPartyId = new FormControl();
+  externalId = new FormControl();
   payerDfspId = new FormControl();
   payerDfspName = new FormControl();
   status = new FormControl();
@@ -94,6 +95,10 @@ export class IncomingRequestToPayComponent implements OnInit {
     },
     {
       type: "payerPartyId",
+      value: "",
+    },
+    {
+      type: "externalId",
       value: "",
     },
     {
@@ -191,6 +196,16 @@ export class IncomingRequestToPayComponent implements OnInit {
         distinctUntilChanged(),
         tap((filterValue) => {
           this.applyFilter(filterValue, "payerPartyId");
+        })
+      )
+      .subscribe();
+
+    this.externalId.valueChanges
+      .pipe(
+        debounceTime(500),
+        distinctUntilChanged(),
+        tap((filterValue) => {
+          this.applyFilter(filterValue, "externalId");
         })
       )
       .subscribe();
