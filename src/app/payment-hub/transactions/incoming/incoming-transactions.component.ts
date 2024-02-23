@@ -70,7 +70,7 @@ export class IncomingTransactionsComponent implements OnInit, AfterViewInit {
       value: ''
     },
     {
-      type: 'externalId',
+      type: 'clientCorrelationId',
       value: ''
     },
     {
@@ -147,7 +147,8 @@ export class IncomingTransactionsComponent implements OnInit, AfterViewInit {
         debounceTime(500),
         distinctUntilChanged(),
         tap((filterValue) => {
-          this.applyFilter(filterValue, 'payeePartyId');
+          if (filterValue.length == 0 || filterValue.length >= 4)
+            this.applyFilter(filterValue, 'payeePartyId');
         })
       )
       .subscribe();
@@ -157,7 +158,8 @@ export class IncomingTransactionsComponent implements OnInit, AfterViewInit {
         debounceTime(500),
         distinctUntilChanged(),
         tap((filterValue) => {
-          this.applyFilter(filterValue, 'payerPartyId');
+          if (filterValue.length == 0 || filterValue.length >= 4)
+            this.applyFilter(filterValue, 'payerPartyId');
         })
       )
       .subscribe();
@@ -253,7 +255,8 @@ export class IncomingTransactionsComponent implements OnInit, AfterViewInit {
         debounceTime(500),
         distinctUntilChanged(),
         tap((filterValue) => {
-          this.applyFilter(filterValue, "externalId");
+          if (filterValue.length == 0 || filterValue.length >= 4)
+            this.applyFilter(filterValue, "clientCorrelationId");
         })
       )
       .subscribe();
