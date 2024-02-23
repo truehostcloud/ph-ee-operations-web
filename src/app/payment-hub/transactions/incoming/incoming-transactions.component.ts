@@ -147,7 +147,7 @@ export class IncomingTransactionsComponent implements OnInit, AfterViewInit {
         debounceTime(500),
         distinctUntilChanged(),
         tap((filterValue) => {
-          if (filterValue.length == 0 || filterValue.length >= 4)
+          if (filterValue.length == 0 || filterValue.length > 3)
             this.applyFilter(filterValue, 'payeePartyId');
         })
       )
@@ -158,7 +158,7 @@ export class IncomingTransactionsComponent implements OnInit, AfterViewInit {
         debounceTime(500),
         distinctUntilChanged(),
         tap((filterValue) => {
-          if (filterValue.length == 0 || filterValue.length >= 4)
+          if (filterValue.length == 0 || filterValue.length > 3)
             this.applyFilter(filterValue, 'payerPartyId');
         })
       )
@@ -255,7 +255,8 @@ export class IncomingTransactionsComponent implements OnInit, AfterViewInit {
         debounceTime(500),
         distinctUntilChanged(),
         tap((filterValue) => {
-          if (filterValue.length == 0 || filterValue.length >= 4)
+          // check if length is reset or above 3
+          if (filterValue.length == 0 || filterValue.length > 3)
             this.applyFilter(filterValue, "clientCorrelationId");
         })
       )
