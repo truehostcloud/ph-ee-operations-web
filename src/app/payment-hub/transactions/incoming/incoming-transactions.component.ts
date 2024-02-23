@@ -52,6 +52,7 @@ export class IncomingTransactionsComponent implements OnInit, AfterViewInit {
   transactionDateFrom = new FormControl();
   /** Transaction date to form control. */
   transactionDateTo = new FormControl();
+  externalId = new FormControl();
   /** Transaction ID form control. */
   transactionId = new FormControl();
   /** Columns to be displayed in transactions table. */
@@ -69,7 +70,7 @@ export class IncomingTransactionsComponent implements OnInit, AfterViewInit {
       value: ''
     },
     {
-      type: 'payerDfspId',
+      type: 'externalId',
       value: ''
     },
     {
@@ -242,6 +243,17 @@ export class IncomingTransactionsComponent implements OnInit, AfterViewInit {
         distinctUntilChanged(),
         tap((filterValue: moment.Moment) => {
           this.applyFilter(filterValue.format(this.dateTimeFormat), 'startTo');
+        })
+      )
+      .subscribe();
+
+
+      this.externalId.valueChanges
+      .pipe(
+        debounceTime(500),
+        distinctUntilChanged(),
+        tap((filterValue) => {
+          this.applyFilter(filterValue, "externalId");
         })
       )
       .subscribe();
