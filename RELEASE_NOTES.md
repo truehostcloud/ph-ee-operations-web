@@ -2,6 +2,7 @@
 
 ## Version 1.0.3
         * [SER-2208] - Fix bugs in searching incoming transactions in PaymentHub Service.
+        * [SER-2257] - Standardize payment hub reports.
 
 ## Version 1.0.2
         * [SER-1596] - Filter incoming requests to pay by external Id
