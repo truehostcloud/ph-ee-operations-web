@@ -263,7 +263,6 @@ export class IncomingRequestToPayComponent implements OnInit {
         debounceTime(500),
         distinctUntilChanged(),
         tap((filterValue) => {
-          filterValue = filterValue.AlphabeticCode;
           this.applyFilter(filterValue, "currency");
         })
       )

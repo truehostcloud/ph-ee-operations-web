@@ -52,6 +52,11 @@
   </mat-form-field> -->
 
   <mat-form-field fxFlex="20%">
+    <mat-label>Currency</mat-label>
+    <input matInput [formControl]="currencyCode" />
+  </mat-form-field>
+
+  <mat-form-field fxFlex="20%">
     <mat-label>Transaction Date From</mat-label>
     <input
       matInput
