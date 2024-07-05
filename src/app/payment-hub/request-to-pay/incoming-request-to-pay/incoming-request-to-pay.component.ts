@@ -27,7 +27,7 @@ import {
 import { RequestToPayService } from "../service/request-to-pay.service";
 import { RequestToPayDataSource } from "../dataSource /requestToPay.datasource";
 /** Custom Data Source */
-import { formatDate } from "../helper/date-format.helper";
+import { formatUTCDate } from "../helper/date-format.helper";
 import { transactionStatusData as statuses } from "../helper/incoming-reqest.helper";
 
 import { DfspEntry } from "../model/dfsp.model";
@@ -329,11 +329,11 @@ export class IncomingRequestToPayComponent implements OnInit {
   //   this.dataSource.sort = this.sort;
   // }
 
-  convertTimestampToDate(timestamp: any) {
+  convertTimestampToUTCDate(timestamp: any) {
     if (!timestamp) {
       return undefined;
     }
-    return formatDate(new Date(timestamp));
+    return formatUTCDate(new Date(timestamp));
   }
 
   formatDate(date: string) {
