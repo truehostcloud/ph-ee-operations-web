@@ -11,13 +11,11 @@ export class IncomingRequestExportComponent implements OnInit {
   constructor(private requestToPayService: RequestToPayService) {}
 
   ngOnInit(): void {}
-  onSubmit() {
-    this.exportCSV(this.csvExport, this.csvName);
-  }
+
   arrayConvert(event: any) {
     event.target.value.split(",");
   }
-  exportCSV(filterBy: any, filterName: string) {
-    this.requestToPayService.exportCSV(filterBy, filterName);
+  exportCSV(filterBy: any) {
+    this.requestToPayService.exportCSV(filterBy);
   }
 }

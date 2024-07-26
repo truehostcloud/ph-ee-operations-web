@@ -10,9 +10,14 @@
     <input matInput [formControl]="externalId" />
   </mat-form-field>
 
-  <mat-form-field fxFlex="20%">
+  <!-- <mat-form-field fxFlex="20%">
     <mat-label>Payer DFSP name</mat-label>
     <input matInput [formControl]="payerDfspName" [matAutocomplete]="dfspEntriesAutocomplete">
+  </mat-form-field> -->
+
+  <mat-form-field fxFlex="20%">
+    <mat-label>Payer DFSP Id</mat-label>
+    <input matInput [formControl]="payerDfspId">
   </mat-form-field>
 
   <mat-form-field fxFlex="20%">
