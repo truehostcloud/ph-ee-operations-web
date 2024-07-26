@@ -1,5 +1,9 @@
 # Release Notes
 
+## Version 1.1.0
+        * [SER-2909] - Add support for filtering payments by paybill short code and till number.
+        * [SER-2925] - Create UI for exporting incoming transactions.
+
 ## Version 1.0.4
         * [SER-2739] - Ensure transactions can be correctly filtered by currency and dates.
 
