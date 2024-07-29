@@ -14,10 +14,10 @@
     <input matInput [formControl]="externalId" />
   </mat-form-field>
 
-  <!-- <mat-form-field fxFlex="20%">
-    <mat-label>Payer DFSP name</mat-label>
-    <input matInput [formControl]="payerDfspName" [matAutocomplete]="dfspEntriesAutocomplete">
-  </mat-form-field> -->
+  <mat-form-field fxFlex="20%">
+    <mat-label>Payer DFSP Id</mat-label>
+    <input matInput [formControl]="payerDfspId">
+  </mat-form-field>
 
   <mat-form-field fxFlex="20%">
     <mat-label>Payee Id</mat-label>
@@ -203,7 +203,7 @@
   </div>
   <form
     #postForm="ngForm"
-    (ngSubmit)="exportCSV(postForm.value, postForm.id)"
+    (ngSubmit)="exportCSV(postForm.value)"
     class="csv-form"
   >
     <div
@@ -227,6 +227,7 @@
           <option value="payeeid">PAYEE ID</option>
           <option value="externalid">EXTERNALID</option>
           <option value="workflowinstancekey">WORKFLOWINSTANCEKEY</option>
+          <option value="payerdfspid">PAYER DFSP ID</option>
         </select>
       </mat-form-field>
       <mat-form-field class="example-full-width form-group" fxFlex="20%">

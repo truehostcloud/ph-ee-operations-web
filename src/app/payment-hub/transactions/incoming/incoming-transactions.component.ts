@@ -100,6 +100,10 @@ export class IncomingTransactionsComponent implements OnInit, AfterViewInit {
     {
       type: 'startTo',
       value: ''
+    },
+    {
+      type: 'payerDfspId',
+      value: ''
     }
   ];
   dateTimeFormat = "YYYY-MM-DD HH:mm:ss";
