@@ -1,24 +1,13 @@
 /** Angular Imports */
-import { Component, OnInit, ViewChild, AfterViewInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
-import { MatTableDataSource } from "@angular/material/table";
 import { FormControl } from "@angular/forms";
-import { Router, ActivatedRoute } from "@angular/router";
+import { ActivatedRoute } from "@angular/router";
 import { requestInterface } from "./incoming-request-to-pay-interface";
 import {
-  HttpClient,
-  HttpParams,
-  HttpHeaders,
-  JsonpClientBackend,
-} from "@angular/common/http";
-/** rxjs Imports */
-import { merge } from "rxjs";
-import {
   tap,
-  startWith,
-  map,
   distinctUntilChanged,
   debounceTime,
 } from "rxjs/operators";
@@ -27,7 +16,7 @@ import {
 import { RequestToPayService } from "../service/request-to-pay.service";
 import { RequestToPayDataSource } from "../dataSource /requestToPay.datasource";
 /** Custom Data Source */
-import { formatDate } from "../helper/date-format.helper";
+import { formatUTCDate } from "../helper/date-format.helper";
 import { transactionStatusData as statuses } from "../helper/incoming-reqest.helper";
 
 import { DfspEntry } from "../model/dfsp.model";
@@ -133,6 +122,10 @@ export class IncomingRequestToPayComponent implements OnInit {
       type: "externalId",
       value: "",
     },
+    {
+      type: 'payerDfspId',
+      value: ''
+    }
   ];
   dateTimeFormat = "YYYY-MM-DD HH:mm:ss";
 
@@ -144,8 +137,7 @@ export class IncomingRequestToPayComponent implements OnInit {
   constructor(
     private requestToPayService: RequestToPayService,
     private route: ActivatedRoute,
-    public dialog: MatDialog,
-    private http: HttpClient
+    public dialog: MatDialog
   ) {
     this.route.data.subscribe(
       (data: {
@@ -263,7 +255,6 @@ export class IncomingRequestToPayComponent implements OnInit {
         debounceTime(500),
         distinctUntilChanged(),
         tap((filterValue) => {
-          filterValue = filterValue.AlphabeticCode;
           this.applyFilter(filterValue, "currency");
         })
       )
@@ -306,9 +297,7 @@ export class IncomingRequestToPayComponent implements OnInit {
 
     // this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
   }
-  onSubmit() {
-    this.exportCSV(this.csvExport, this.csvName);
-  }
+
   loadTransactionsPage() {
     // if (!this.sort.direction) {
     //   delete this.sort.active;
@@ -330,11 +319,11 @@ export class IncomingRequestToPayComponent implements OnInit {
   //   this.dataSource.sort = this.sort;
   // }
 
-  convertTimestampToDate(timestamp: any) {
+  convertTimestampToUTCDate(timestamp: any) {
     if (!timestamp) {
       return undefined;
     }
-    return formatDate(new Date(timestamp));
+    return formatUTCDate(new Date(timestamp));
   }
 
   formatDate(date: string) {
@@ -405,9 +394,9 @@ export class IncomingRequestToPayComponent implements OnInit {
   displayDfspName(entry?: any): string | undefined {
     return entry ? entry.name : undefined;
   }
-  exportCSV(filterBy: any, filterName: string) {
+  exportCSV(filterBy: any) {
     filterBy[filterBy.cars] = filterBy.val;
-    this.requestToPayService.exportCSV(filterBy, filterName);
+    this.requestToPayService.exportCSV(filterBy);
   }
   /**
    * Displays office name in form control input.
